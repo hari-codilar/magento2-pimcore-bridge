@@ -89,6 +89,7 @@ class MultiselectStrategy extends AbstractOptionTypeStrategy
             'label'        => $this->attrData['label'],
             'input'        => 'multiselect',
             'user_defined' => true,
+            'filterable'   => true,
             'backend'      => ArrayBackend::class,
         ];
 

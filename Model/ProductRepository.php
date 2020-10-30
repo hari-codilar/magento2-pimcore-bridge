@@ -48,7 +48,7 @@ class ProductRepository extends \Magento\Catalog\Model\ProductRepository impleme
     {
         $connection = $this->resourceModel->getConnection();
         $table = $connection->getTableName('catalog_product_entity_int');
-        $sql = "SELECT entity_id FROM $table where value=?";
+        $sql = "SELECT row_id FROM $table where value=?";
 
         return $connection->fetchOne($sql, $pimcoreId);
     }

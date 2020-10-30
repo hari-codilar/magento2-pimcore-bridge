@@ -51,10 +51,10 @@ abstract class  AbstractStrategy implements AttributeCreationStrategyInterface
         'required'                => false,
         'user_defined'            => true,
         'searchable'              => true,
-        'filterable'              => true,
-        'comparable'              => true,
-        'visible_on_front'        => true,
-        'used_in_product_listing' => true,
+        'filterable'              => false,
+        'comparable'              => false,
+        'visible_on_front'        => false,
+        'used_in_product_listing' => false,
         'unique'                  => false,
     ];
 
