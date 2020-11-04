@@ -88,7 +88,10 @@ class CategoryUpdateTransformator implements ResponseTransformatorInterface
                     $flatData->setData('parent_id', null);
                 }
             } else {
-                $flatData->setData('parent_id', $this->storeManager->getStore()->getRootCategoryId());
+                /** Get Current store's Root Category */
+                $flatData->setData('parent_id', $this->storeManager->getStore(
+                    $response->getMetaData('store_view_id')
+                )->getRootCategoryId());
             }
 
             $container->setData($id, $flatData);

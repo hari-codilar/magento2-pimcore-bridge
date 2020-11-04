@@ -172,6 +172,8 @@ class UpdateCategoryAction implements ActionInterface
             );
         }
 
+        /** Set StoreViewId to create category under respective root category */
+        $response->setMetaData("store_view_id", $queue->getStoreViewId());
         $dto = $this->transformator->transform($response);
 
         try {
