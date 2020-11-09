@@ -29,6 +29,7 @@ use Magento\Framework\Validator\AbstractValidator;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Eav\Model\Config as EavConfig;
 use Magento\Eav\Model\ConfigFactory as EavConfigFactory;
+use Magento\Catalog\Api\Data\ProductAttributeInterface;
 
 /**
  * Class NewAttributeListener
@@ -161,9 +162,11 @@ class NewAttributeListener implements ObserverInterface
         if (empty($productsData)) {
             return;
         }
-
+        $defaultAttrSetId = $this->eavConfigFactory->create()
+                            ->getEntityType(ProductAttributeInterface::ENTITY_TYPE_CODE)
+                            ->getDefaultAttributeSetId();
         foreach ($productsData as $pimId => $data) {
-            $attrSet = $this->attributeSetRepository->getByChecksum($data['attr_checksum']['value']);
+            $attrSet = $this->attributeSetRepository->get($defaultAttrSetId);
 
             $config = $this->configFactory->create();
             $groupId = $config->getAttributeGroupId($attrSet->getAttributeSetId(), 'Pimcore');

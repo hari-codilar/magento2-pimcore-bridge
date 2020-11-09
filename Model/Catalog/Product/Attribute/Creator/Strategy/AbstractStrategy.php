@@ -15,7 +15,7 @@ use Magento\Eav\Setup\EavSetupFactory;
 /**
  * Class AbstractStrategy
  */
-abstract class  AbstractStrategy implements AttributeCreationStrategyInterface
+abstract class AbstractStrategy implements AttributeCreationStrategyInterface
 {
     /**
      * @var eavSetupFactory
@@ -52,7 +52,7 @@ abstract class  AbstractStrategy implements AttributeCreationStrategyInterface
         'user_defined'            => true,
         'searchable'              => true,
         'filterable'              => false,
-        'comparable'              => false,
+        'comparable'              => true,
         'visible_on_front'        => false,
         'used_in_product_listing' => false,
         'unique'                  => false,

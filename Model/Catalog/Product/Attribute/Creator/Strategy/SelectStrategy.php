@@ -84,8 +84,8 @@ class SelectStrategy extends AbstractOptionTypeStrategy
             'type'         => 'int',
             'label'        => $this->attrData['label'],
             'input'        => 'select',
+            'filterable'   => true,
             'user_defined' => true,
-            'filterable'   => true
         ];
 
         if ($this->isConfigurable()) {

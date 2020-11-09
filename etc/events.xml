@@ -7,7 +7,7 @@
         <observer name="configurableProductsLinker" instance="Divante\PimcoreIntegration\Listeners\LinkConfigurableListener"/>
     </event>
     <event name="catalog_product_attribute_set_evaluate">
-        <observer name="newAttributeSetHandler" instance="Divante\PimcoreIntegration\Listeners\NewAttributeSetListener"/>
+        <observer name="newAttributeSetHandler" instance="Divante\PimcoreIntegration\Listeners\NewAttributeSetListener" disabled="true"/>
     </event>
     <event name="catalog_product_attributes_evaluate">
         <observer name="newAttributesHandler" instance="Divante\PimcoreIntegration\Listeners\NewAttributeListener"/>

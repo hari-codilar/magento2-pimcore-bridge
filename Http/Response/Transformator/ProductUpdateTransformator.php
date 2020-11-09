@@ -85,6 +85,9 @@ class ProductUpdateTransformator implements ResponseTransformatorInterface
         $rawData = $rawResponse['data'];
 
         foreach ($rawData as $productId => $data) {
+            if (isset($data['elements']['attribute_set_id'])) {
+                $attrSetId = $data['elements']['attribute_set_id']['value']['value'];
+            }
             /** @var PimcoreProductInterface $pimcoreProduct */
             $pimcoreProduct = $this->pimcoreProductFactory->create();
             $pimcoreProduct->setElements($data['elements']);
@@ -94,6 +97,7 @@ class ProductUpdateTransformator implements ResponseTransformatorInterface
 
             $pimcoreProduct->setData(
                 'attribute_set_id',
+                ($attrSetId) ??
                 $this->attributeSetRepository->getByChecksum($data['attr_checksum']['value'])->getAttributeSetId()
             );
 

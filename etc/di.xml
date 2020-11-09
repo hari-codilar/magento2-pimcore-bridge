@@ -125,7 +125,7 @@
     <type name="Divante\PimcoreIntegration\Model\Pimcore\PimcoreProduct">
         <arguments>
             <argument name="complexMappers" xsi:type="array">
-                <item name="visibility" xsi:type="object">Divante\PimcoreIntegration\Model\Pimcore\Mapper\VisibilityMapper</item>
+                <!-- <item name="visibility" xsi:type="object">Divante\PimcoreIntegration\Model\Pimcore\Mapper\VisibilityMapper</item> -->
                 <item name="is_active_in_pim" xsi:type="object">Divante\PimcoreIntegration\Model\Pimcore\Mapper\BooleanMapper</item>
             </argument>
         </arguments>
@@ -164,6 +164,7 @@
                 <item name="shipment_type" xsi:type="string">shipment_type</item>
                 <item name="status" xsi:type="string">status</item>
                 <item name="is_active_in_pim" xsi:type="string">is_active_in_pim</item>
+                <item name="attribute_set_id" xsi:type="string">attribute_set_id</item>
             </argument>
         </arguments>
     </type>
