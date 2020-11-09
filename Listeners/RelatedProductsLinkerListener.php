@@ -61,32 +61,24 @@ class RelatedProductsLinkerListener implements ObserverInterface
         $pimcoreProduct = $observer->getData('pimcore');
         $product = $observer->getData('product');
 
-        $relatedProductsIds = $pimcoreProduct->getData('related_products');
-
-        if (null === $relatedProductsIds) {
-            return;
-        }
-
-        $collection = $this->getCollectionOfRelatedProducts($relatedProductsIds);
-        $collection->setFlag('has_stock_status_filter', true);
-
-        if (!$collection->getSize()) {
-            $product->setProductLinks();
-
-            return;
-        }
-
-        $productLinks = $this->linkInterfaceFactory->create();
+        $relatedIds = $pimcoreProduct->getData('related_products');
+        $upSellIds = $pimcoreProduct->getData('upsell_products');
+        $crossSellIds = $pimcoreProduct->getData('crosssell_products');
 
         $links = [];
 
-        foreach ($collection->getItems() as $item) {
-            $links[] = $productLinks
-                ->setSku($pimcoreProduct->getData('sku'))
-                ->setLinkedProductSku($item->getData('sku'))
-                ->setLinkType("related");
+        if (null !== $relatedIds) {
+            $links = array_merge($links, $this->createProductLinks($relatedIds, 'related', $pimcoreProduct->getSku()));
         }
-
+        if (null !== $upSellIds) {
+            $links = array_merge($links, $this->createProductLinks($upSellIds, 'upsell', $pimcoreProduct->getSku()));
+        }
+        if (null !== $crossSellIds) {
+            $links = array_merge($links, $this->createProductLinks($crossSellIds, 'crosssell', $pimcoreProduct->getSku()));
+        }
+        if (!count($links)) {
+            return;
+        }
         $product->setProductLinks($links);
         $this->productRepository->save($product);
     }
@@ -103,5 +95,31 @@ class RelatedProductsLinkerListener implements ObserverInterface
         $collection->addFieldToFilter('pimcore_id', ['in' => $relatedProductsIds]);
 
         return $collection;
+    }
+
+    /**
+     * Creates Products Links for the given sku and product ids
+     *
+     * @param int[] $productIds
+     * @param string $linkType
+     * @param string $sku
+     * @return \Magento\Catalog\Api\Data\ProductLinkInterface[]
+     */
+    protected function createProductLinks($productIds, $linkType, $sku)
+    {
+        $collection = $this->getCollectionOfRelatedProducts($productIds);
+        $links = [];
+        $collection->setFlag('has_stock_status_filter', true);
+
+        if (!$collection->getSize()) {
+            return $links;
+        }
+        foreach ($collection->getItems() as $item) {
+            $links[] = $this->linkInterfaceFactory->create()
+                ->setSku($sku)
+                ->setLinkedProductSku($item->getSku())
+                ->setLinkType($linkType);
+        }
+        return $links;
     }
 }
