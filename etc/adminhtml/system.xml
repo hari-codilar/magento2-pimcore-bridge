@@ -112,6 +112,14 @@
                     <label>Start Time</label>
                 </field>
             </group>
+            <group id="queue_consumer" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Consume Products and Category Queue</label>
+                <field id="frequency" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Expression</label>
+                    <comment><![CDATA[<strong style="color: red">Warning! </strong> Enter a valid CRON Expression.
+                    <p class="note">Invalid value may cause CRON to not work.</p>]]></comment>
+                </field>
+            </group>
             <group id="enable_products" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Enable Products</label>
                 <field id="is_active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">

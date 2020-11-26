@@ -18,6 +18,9 @@
             <enable_products>
                 <is_active>1</is_active>
             </enable_products>
+            <queue_consumer>
+                <frequency>0 4 * * *</frequency>
+            </queue_consumer>
         </cron>
     </default>
 </config>

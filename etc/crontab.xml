@@ -13,5 +13,8 @@
         <job name="remove_old_queue_entries" instance="Divante\PimcoreIntegration\Cron\OldQueueEntriesRemover" method="execute">
             <schedule>0 0 * * *</schedule>
         </job>
+        <job name="pimcore_data_import" instance="Divante\PimcoreIntegration\Cron\QueueConsumer" method="consume">
+            <config_path>cron/queue_consumer/frequency</config_path>
+        </job>
     </group>
 </config>
