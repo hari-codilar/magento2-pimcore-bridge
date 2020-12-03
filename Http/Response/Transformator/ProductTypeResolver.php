@@ -24,6 +24,9 @@ class ProductTypeResolver
     public function resolveType(array $data): string
     {
         $type = Type::TYPE_SIMPLE;
+        if ($this->isBundle($data)) {
+            return Type::TYPE_BUNDLE;
+        }
         if ($this->isConfigurable($data)) {
             return Configurable::TYPE_CODE;
         }
@@ -31,6 +34,19 @@ class ProductTypeResolver
         list($data, $type) = $this->beforeReturn($data, $type);
 
         return $type;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    protected function isBundle(array $data): bool
+    {
+        return ($data['properties']['isBundle']['data']) ?? false;
+        if (empty($data['type'])) {
+            return false;
+        }
+        return $data['type'] === 'bundle' || $data['type'] === 'bundle_attributes';
     }
 
     /**

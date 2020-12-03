@@ -22,12 +22,14 @@ class VisibilityMapper implements ComplexMapperInterface
      */
     public function map(array $attributeData): int
     {
-        if (empty($attributeData['value']) || $value = $attributeData['value'] === false) {
-            $value = Visibility::VISIBILITY_NOT_VISIBLE;
-        } else {
-            $value = Visibility::VISIBILITY_BOTH;
+        switch($attributeData['value']) {
+            case Visibility::VISIBILITY_NOT_VISIBLE :
+            case Visibility::VISIBILITY_IN_CATALOG :
+            case Visibility::VISIBILITY_IN_SEARCH :
+                return $attributeData['value'];
+            case Visibility::VISIBILITY_BOTH :
+            default:
+                return Visibility::VISIBILITY_BOTH;
         }
-
-        return $value;
     }
 }

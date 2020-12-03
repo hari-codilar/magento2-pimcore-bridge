@@ -125,8 +125,9 @@
     <type name="Divante\PimcoreIntegration\Model\Pimcore\PimcoreProduct">
         <arguments>
             <argument name="complexMappers" xsi:type="array">
-                <!-- <item name="visibility" xsi:type="object">Divante\PimcoreIntegration\Model\Pimcore\Mapper\VisibilityMapper</item> -->
+                <item name="visibility" xsi:type="object">Divante\PimcoreIntegration\Model\Pimcore\Mapper\VisibilityMapper</item>
                 <item name="is_active_in_pim" xsi:type="object">Divante\PimcoreIntegration\Model\Pimcore\Mapper\BooleanMapper</item>
+                <item name="bundle_options" xsi:type="object">Divante\PimcoreIntegration\Model\Pimcore\Mapper\BundleOptionMapper</item>
             </argument>
         </arguments>
     </type>
@@ -173,6 +174,7 @@
             <argument name="strategies" xsi:type="array">
                 <item name="simple" xsi:type="string">Divante\PimcoreIntegration\Queue\Action\TypeStrategy\SimpleProductStrategy</item>
                 <item name="configurable" xsi:type="string">Divante\PimcoreIntegration\Queue\Action\TypeStrategy\ConfigurableProductStrategy</item>
+                <item name="bundle" xsi:type="string">Divante\PimcoreIntegration\Queue\Action\TypeStrategy\BundleProductStrategy</item>
             </argument>
         </arguments>
     </type>
